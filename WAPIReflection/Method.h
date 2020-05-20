@@ -11,15 +11,14 @@ namespace WAPIReflection {
 
 		FuncSignature signature() const;
 
-		void* rawPtr() const {
-			return mpCode;
-		}
+		void* rawCodePtr() const;
+		bool isPure() const;
 
 		template<typename Class, typename ReturnType, typename... Args>
 		std::function<ReturnType(Class&, Args...)> functionPtr() const
 		{
 			return [this](Class& pThis, Args... args) -> ReturnType {
-				return ((ReturnType(__thiscall*)(Class&, Args...))(this->rawPtr()))(pThis, args...);
+				return ((ReturnType(__thiscall*)(Class&, Args...))(this->rawCodePtr()))(pThis, args...);
 			};
 		}
 

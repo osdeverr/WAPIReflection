@@ -29,8 +29,7 @@ std::vector<WAPIReflection::Method> WAPIReflection::Class::methods() const
 
 	for (auto& child : children())
 		if (child.tag() == SymTag::Function)
-			if (child.hasInfo<TI_GET_ADDRESS>())
-				result.push_back(child);
+			result.push_back(child);
 
 	return result;
 }

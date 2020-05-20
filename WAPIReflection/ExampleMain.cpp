@@ -3,6 +3,7 @@
 #include <DbgHelp.h>
 #include <codecvt>
 #include <filesystem>
+#include <fstream>
 
 #include "Assembly.h"
 #include "Type.h"
@@ -50,17 +51,10 @@ bool IsTypesSame(const Type& t1, const Type& t2)
 	return t1 == t2;
 }
 
-int main()
+void ShowType(const Type& t)
 {
-	_wchdir(L"E:\\WAPIReflection\\Debug");
-
-	PlakableImpl e;
-
-	const Type& t = typeof(e);
 	auto methods = t.asClass().methods();
 	auto fields = t.asClass().fields();
-
-	assert(typeof<HWND>() == typeof<HWND>());
 
 	std::cout << "class " << t.name();
 	if (t.asClass().baseClass())
@@ -80,11 +74,36 @@ int main()
 			i++;
 		}
 
-		std::cout << ");" << std::endl;
+		std::cout << ")";
+
+		if (m.isPure())
+			std::cout << " = 0";
+
+		std::cout << ";" << std::endl;
 	}
 	for (auto& f : fields)
 	{
 		std::cout << "\t" << f.type().name() << " " << f.name() << ";" << std::endl;
 	}
 	std::cout << "}" << std::endl;
+
+	if (t.asClass().baseClass())
+	{
+		std::cout << "Press any key to navigate to base!" << std::endl;
+		std::cin.get();
+
+		ShowType(*t.asClass().baseClass());
+	}
+}
+
+int main()
+{
+	_wchdir(L"E:\\WAPIReflection\\Debug");
+
+	int val;
+	std::ofstream e("elay.ky");
+	assert(typeof<HWND>() == typeof<HWND>());
+	assert(typeof<HDC>() != typeof<HMODULE>());
+
+	ShowType(typeof<IDirect3DSurface9>());
 }
