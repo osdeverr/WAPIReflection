@@ -37,15 +37,6 @@ private:
 	std::string mFak;
 };
 
-enum ElayEnum
-{
-	Elay,
-	Is,
-	Durak,
-	Ebanat,
-	Dolboeb
-};
-
 bool IsTypesSame(const Type& t1, const Type& t2)
 {
 	return t1 == t2;
@@ -62,7 +53,14 @@ void ShowType(const Type& t)
 	std::cout << std::endl << "{" << std::endl;
 	for (auto& m : methods)
 	{
-		std::cout << "\t" << m.signature().returnType().name() << " " << m.name() << "(";
+		std::cout << "\t";
+		
+		if (m.isPure())
+			std::cout << "virtual ";
+
+		std::cout << m.signature().returnType().name() << " ";
+
+		std::cout << m.name() << "(";
 
 		auto params = m.signature().parameters();
 		size_t i = 0;
@@ -85,7 +83,7 @@ void ShowType(const Type& t)
 	{
 		std::cout << "\t" << f.type().name() << " " << f.name() << ";" << std::endl;
 	}
-	std::cout << "}" << std::endl;
+	std::cout << "};" << std::endl;
 
 	if (t.asClass().baseClass())
 	{
@@ -96,14 +94,23 @@ void ShowType(const Type& t)
 	}
 }
 
+enum class IAmAEnum
+{
+	One,
+	Two,
+	Three,
+	Four,
+	Six,
+	Seven,
+	Eight
+};
+
 int main()
 {
 	_wchdir(L"E:\\WAPIReflection\\Debug");
 
-	int val;
-	std::ofstream e("elay.ky");
-	assert(typeof<HWND>() == typeof<HWND>());
-	assert(typeof<HDC>() != typeof<HMODULE>());
-
-	ShowType(typeof<IDirect3DSurface9>());
+	IAmAEnum e;
+	auto t = typeof(e).asEnum();
+	for (auto& val : t.enumValues())
+		std::cout << val.first << "=" << val.second << std::endl;
 }
