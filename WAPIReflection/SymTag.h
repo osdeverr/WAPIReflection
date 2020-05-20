@@ -1,0 +1,43 @@
+#pragma once
+
+namespace WAPIReflection {
+	enum class SymTag {
+		Null,
+		Exe,
+		Compiland,
+		CompilandDetails,
+		CompilandEnv,
+		Function,
+		Block,
+		Data,
+		Annotation,
+		Label,
+		PublicSymbol,
+		UDT,
+		Enum,
+		FunctionType,
+		PointerType,
+		ArrayType,
+		BaseType,
+		Typedef,
+		BaseClass,
+		Friend,
+		FunctionArgType,
+		FuncDebugStart,
+		FuncDebugEnd,
+		UsingNamespace,
+		VTableShape,
+		VTable,
+		Custom,
+		Thunk,
+		CustomType,
+		ManagedType,
+		Dimension,
+		CallSite,
+		InlineSite,
+		BaseInterface,
+		VectorType,
+		MatrixType,
+		HLSLType
+	};
+}
