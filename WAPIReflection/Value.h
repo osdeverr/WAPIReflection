@@ -29,7 +29,7 @@ namespace WAPIReflection {
 		{
 			auto& arr = mType.asArray();
 			if (index >= arr.length())
-				throw std::out_of_range("operator[] out of array bounds");
+				throw std::out_of_range("operator[] out of array bounds: " + std::to_string(index) + " >= " + std::to_string(arr.length()));
 
 			return Value((char*)mpValue + arr.elementType().size() * index, arr.elementType());
 		}

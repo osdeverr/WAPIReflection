@@ -130,7 +130,7 @@ int main()
 		auto fPlak = c.findField("mPlak")->bind(plak);
 		fPlak = 255;
 
-		c.findField("mFloats")->bind(plak)[4] = 24.5f;
+		c.findField("mFloats")->bind(plak)[4666] = 24.5f;
 
 		WNDCLASSEXA wcl;
 		wcl.cbSize = 666;
@@ -140,7 +140,7 @@ int main()
 
 		c.findMethod("Plak")->invoke<bool>(&plak, 13, 12);
 
-		ShowType(typeof<PlakableImpl>());
+		ShowType(typeof<WNDCLASSEXA>());
 	}
 	catch (const std::exception& e)
 	{
