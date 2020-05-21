@@ -144,6 +144,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Array.h" />
     <ClInclude Include="Assembly.h" />
     <ClInclude Include="BasicType.h" />
     <ClInclude Include="Class.h" />
@@ -151,11 +152,15 @@
     <ClInclude Include="Field.h" />
     <ClInclude Include="FuncSignature.h" />
     <ClInclude Include="Method.h" />
+    <ClInclude Include="Pointer.h" />
     <ClInclude Include="Symbol.h" />
     <ClInclude Include="SymTag.h" />
     <ClInclude Include="Type.h" />
+    <ClInclude Include="Value.h" />
+    <ClInclude Include="ValueType.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Array.cpp" />
     <ClCompile Include="Assembly.cpp" />
     <ClCompile Include="Class.cpp" />
     <ClCompile Include="Enum.cpp" />
@@ -163,8 +168,10 @@
     <ClCompile Include="Field.cpp" />
     <ClCompile Include="FuncSignature.cpp" />
     <ClCompile Include="Method.cpp" />
+    <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="Symbol.cpp" />
     <ClCompile Include="Type.cpp" />
+    <ClCompile Include="ValueType.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

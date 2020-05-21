@@ -13,6 +13,7 @@ namespace WAPIReflection {
 		Unknown,
 		Function,
 		ValueType,
+		Array,
 		Pointer,
 		Class,
 		Enum
@@ -20,6 +21,9 @@ namespace WAPIReflection {
 
 	class Enum;
 	class Class;
+	class Pointer;
+	class Array;
+	class ValueType;
 
 	class Type : public Symbol
 	{
@@ -29,9 +33,13 @@ namespace WAPIReflection {
 
 		virtual std::string name() const override;
 		TypeKind kind() const;
+		std::size_t size() const;
 
 		const Enum asEnum() const;
 		const Class asClass() const;
+		const ValueType asValueType() const;
+		const Pointer asPointer() const;
+		const Array asArray() const;
 
 		void dump(int tabs = 0) const;
 	};

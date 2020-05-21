@@ -25,10 +25,15 @@ namespace WAPIReflection {
 		std::vector<Symbol> children() const;
 
 		bool operator==(const Symbol& rhs) const {
-			return
+			bool eqByIds =
 				this->mpOwnerAssembly == rhs.mpOwnerAssembly &&
 				this->mModBase == rhs.mModBase &&
 				this->mSymbolID == rhs.mSymbolID;
+			bool eqByName = false;
+			if (hasInfo<TI_GET_SYMNAME>())
+				eqByName = this->name() == rhs.name();
+
+			return eqByIds | eqByName;
 		}
 		bool operator!=(const Symbol& rhs) const {
 			return !(*this == rhs);

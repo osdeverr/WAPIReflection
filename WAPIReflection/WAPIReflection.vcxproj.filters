@@ -42,6 +42,15 @@
     <ClCompile Include="FuncSignature.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Array.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Pointer.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ValueType.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assembly.h">
@@ -72,6 +81,18 @@
       <Filter>include</Filter>
     </ClInclude>
     <ClInclude Include="FuncSignature.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Pointer.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Array.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="ValueType.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="Value.h">
       <Filter>include</Filter>
     </ClInclude>
   </ItemGroup>

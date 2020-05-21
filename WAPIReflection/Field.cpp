@@ -1,12 +1,20 @@
 #include "Field.h"
+#include "Class.h"
 
-WAPIReflection::Field::Field(const Symbol& sym) : Symbol(sym)
+WAPIReflection::Field::Field(const Class* pClass, const Symbol& sym)
+	: mpClass(pClass), Symbol(sym),
+	mFieldType(Type(mpOwnerAssembly, mModBase, queryInfo<std::uint32_t, TI_GET_TYPE>()))
 {
 }
 
-WAPIReflection::Type WAPIReflection::Field::type() const
+const WAPIReflection::Class& WAPIReflection::Field::parentClass() const
 {
-	return Type(mpOwnerAssembly, mModBase, queryInfo<std::uint32_t, TI_GET_TYPE>());
+	return *mpClass;
+}
+
+const WAPIReflection::Type& WAPIReflection::Field::type() const
+{
+	return mFieldType;
 }
 
 std::uint32_t WAPIReflection::Field::offset() const

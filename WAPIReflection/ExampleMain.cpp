@@ -28,13 +28,15 @@ class PlakableImpl : public IPlakable
 {
 public:
 	bool Plak(int a, int b) {
-		std::cout << mFak << ": " << a + b << std::endl;
+		std::cout << mFak << " (" << mFloats[4] << "): " << a + b << std::endl;
 		return true;
 	}
 private:
-	int mPlak;
-	const char* mEbalak;
-	std::string mFak;
+	int mPlak = 228;
+	const char* mEbalak = "elamm4";
+	std::string mFak = "Super fak result";
+
+	float mFloats[64];
 };
 
 bool IsTypesSame(const Type& t1, const Type& t2)
@@ -79,9 +81,10 @@ void ShowType(const Type& t)
 
 		std::cout << ";" << std::endl;
 	}
+	std::cout << std::endl;
 	for (auto& f : fields)
 	{
-		std::cout << "\t" << f.type().name() << " " << f.name() << ";" << std::endl;
+		std::cout << "\t" << f.type().name() << " " << f.name() << "; // +0x" << std::hex << f.offset() << std::dec << std::endl;
 	}
 	std::cout << "};" << std::endl;
 
@@ -105,12 +108,43 @@ enum class IAmAEnum
 	Eight
 };
 
+template<typename T>
+void printoutAny(Value<T> val)
+{
+	std::cout << "Value (arbitrary): " << (float) val << std::endl;
+}
+
+template<>
+void printoutAny(Value<PlakableImpl> val)
+{
+	std::cout << "Value (from PlakableImpl): " << (float)val << std::endl;
+}
+
 int main()
 {
 	_wchdir(L"E:\\WAPIReflection\\Debug");
 
-	IAmAEnum e;
-	auto t = typeof(e).asEnum();
-	for (auto& val : t.enumValues())
-		std::cout << val.first << "=" << val.second << std::endl;
+	try {
+		PlakableImpl plak;
+		auto c = typeof(plak).asClass();
+		auto fPlak = c.findField("mPlak")->bind(plak);
+		fPlak = 255;
+
+		c.findField("mFloats")->bind(plak)[4] = 24.5f;
+
+		WNDCLASSEXA wcl;
+		wcl.cbSize = 666;
+
+		printoutAny(fPlak);
+		printoutAny(typeof(wcl).asClass().findField("cbSize")->bind(wcl));
+
+		c.findMethod("Plak")->invoke<bool>(&plak, 13, 12);
+
+		ShowType(typeof<PlakableImpl>());
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+		throw;
+	}
 }

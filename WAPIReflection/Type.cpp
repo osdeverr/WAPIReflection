@@ -8,6 +8,9 @@
 
 #include "Class.h"
 #include "Enum.h"
+#include "ValueType.h"
+#include "Pointer.h"
+#include "Array.h"
 
 WAPIReflection::Type::Type(const Symbol& sym) : Symbol(sym)
 {
@@ -91,6 +94,11 @@ std::string WAPIReflection::Type::name() const
 	{
 		return primitiveTypenames[queryInfo<BasicType, TI_GET_BASETYPE>()];
 	}
+	case TypeKind::Array:
+	{
+		Type t(mpOwnerAssembly, mModBase, queryInfo<std::uint32_t, TI_GET_TYPE>());
+		return t.name() + "[" + std::to_string(queryInfo<std::uint32_t, TI_GET_COUNT>()) + "]";
+	}
 	default:
 	{
 		return "<unknown typename>";
@@ -104,6 +112,8 @@ WAPIReflection::TypeKind WAPIReflection::Type::kind() const
 	{
 	case SymTag::BaseType:
 		return TypeKind::ValueType;
+	case SymTag::ArrayType:
+		return TypeKind::Array;
 	case SymTag::FunctionType:
 		return TypeKind::Function;
 	case SymTag::UDT:
@@ -115,6 +125,11 @@ WAPIReflection::TypeKind WAPIReflection::Type::kind() const
 	default:
 		return TypeKind::Unknown;
 	}
+}
+
+std::size_t WAPIReflection::Type::size() const
+{
+	return (std::size_t) queryInfo<std::uint64_t, TI_GET_LENGTH>();
 }
 
 const WAPIReflection::Enum WAPIReflection::Type::asEnum() const
@@ -131,6 +146,30 @@ const WAPIReflection::Class WAPIReflection::Type::asClass() const
 		throw new std::invalid_argument("This type can't be used as a class");
 
 	return Class(*this);
+}
+
+const WAPIReflection::ValueType WAPIReflection::Type::asValueType() const
+{
+	if (kind() != TypeKind::ValueType)
+		throw new std::invalid_argument("This type can't be used as a value type");
+
+	return ValueType(*this);
+}
+
+const WAPIReflection::Pointer WAPIReflection::Type::asPointer() const
+{
+	if (kind() != TypeKind::Pointer)
+		throw new std::invalid_argument("This type can't be used as a pointer");
+
+	return Pointer(*this);
+}
+
+const WAPIReflection::Array WAPIReflection::Type::asArray() const
+{
+	if (kind() != TypeKind::Array)
+		throw new std::invalid_argument("This type can't be used as an array");
+
+	return Array(*this);
 }
 
 void WAPIReflection::Type::dump(int tabs) const
