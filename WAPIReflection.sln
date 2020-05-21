@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WAPIReflection", "WAPIReflection\WAPIReflection.vcxproj", "{4FB618A2-8D4E-4676-BDEC-02B977D84139}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AssemblyTest", "AssemblyTest\AssemblyTest.vcxproj", "{AE793820-81DB-469F-9823-2053BBAD4FFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{4FB618A2-8D4E-4676-BDEC-02B977D84139}.Release|x64.Build.0 = Release|x64
 		{4FB618A2-8D4E-4676-BDEC-02B977D84139}.Release|x86.ActiveCfg = Release|Win32
 		{4FB618A2-8D4E-4676-BDEC-02B977D84139}.Release|x86.Build.0 = Release|Win32
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Debug|x64.ActiveCfg = Debug|x64
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Debug|x64.Build.0 = Debug|x64
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Debug|x86.ActiveCfg = Debug|Win32
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Debug|x86.Build.0 = Debug|Win32
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Release|x64.ActiveCfg = Release|x64
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Release|x64.Build.0 = Release|x64
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Release|x86.ActiveCfg = Release|Win32
+		{AE793820-81DB-469F-9823-2053BBAD4FFA}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

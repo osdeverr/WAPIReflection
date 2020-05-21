@@ -36,7 +36,7 @@ private:
 	const char* mEbalak = "elamm4";
 	std::string mFak = "Super fak result";
 
-	float mFloats[64];
+	float mFloats[64] = { 0 };
 };
 
 bool IsTypesSame(const Type& t1, const Type& t2)
@@ -118,12 +118,17 @@ int main()
 	_wchdir(L"E:\\WAPIReflection\\Debug");
 
 	try {
+		for (auto& e : typeof(TI_FINDCHILDREN).asEnum().enumValues())
+		{
+			std::cout << e.first << " = " << e.second << std::endl;
+		}
+
 		PlakableImpl plak;
 		auto c = typeof(plak).asClass();
 		auto fPlak = c.findField("mPlak")->bind(plak);
 		fPlak = 255;
 
-		c.findField("mFloats")->bind(plak)[4] = 24.5f;
+		bind_field<PlakableImpl>(plak, "mFloats")[4] = 24.5f;
 
 		WNDCLASSEXA wcl;
 		wcl.cbSize = 666;
@@ -133,7 +138,10 @@ int main()
 
 		c.findMethod("Plak")->invoke<bool>(&plak, 13, 12);
 
-		ShowType(typeof<WNDCLASSEXA>());
+		ShowType(typeof<Assembly>());
+
+		Assembly ass("AssemblyTest.dll");
+		ShowType(*ass.FindType("ImAPlakStruct"));
 	}
 	catch (const std::exception& e)
 	{

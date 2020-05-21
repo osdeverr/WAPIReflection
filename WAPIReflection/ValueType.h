@@ -56,21 +56,21 @@ namespace WAPIReflection {
 			switch (t)
 			{
 			case BasicType::Char:
-				return *(char*)pData;
+				return (T) *(char*)pData;
 			case BasicType::WChar:
-				return *(wchar_t*)pData;
+				return (T) *(wchar_t*)pData;
 			case BasicType::Int:
-				return *(signed int*)pData;
+				return (T) *(signed int*)pData;
 			case BasicType::UInt:
-				return *(unsigned int*)pData;
+				return (T) *(unsigned int*)pData;
 			case BasicType::Float:
-				return *(float*)pData;
+				return (T) *(float*)pData;
 			case BasicType::Bool:
-				return *(bool*)pData;
+				return (T) *(bool*)pData;
 			case BasicType::Long:
-				return *(signed long*)pData;
+				return (T) *(signed long*)pData;
 			case BasicType::ULong:
-				return *(unsigned long*)pData;
+				return (T) *(unsigned long*)pData;
 
 			default:
 				throw std::exception("Unimplemented ValueType conversion");

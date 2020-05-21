@@ -65,9 +65,9 @@ WAPIReflection::Assembly::Assembly(const std::string& fileName)
 {
 	TryInit();
 
-	LoadLibraryA(fileName.c_str());
+	auto hMod = LoadLibraryA(fileName.c_str());
 
-	mModuleBase = SymLoadModule(GetCurrentProcess(), NULL, fileName.c_str(), NULL, 0, 0);
+	mModuleBase = SymLoadModule(GetCurrentProcess(), NULL, fileName.c_str(), NULL, (DWORD) hMod, 0);
 	if (!mModuleBase)
 		throw std::system_error(
 			std::error_code(

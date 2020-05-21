@@ -40,4 +40,21 @@ namespace WAPIReflection {
 		const Class* mpClass;
 		Type mFieldType;
 	};
+
+	// A helper to simplify binding fields
+	template<class Class>
+	Value bind_field(Class& obj, const std::string& field)
+	{
+		auto t = typeof<Class>();
+
+		if(t.kind() != TypeKind::Class)
+			throw std::invalid_argument("Type " + t.name() + " is not a class");
+
+		auto cl = t.asClass();
+		auto f = cl.findField(field);
+		if (f)
+			return f->bind(obj);
+		else
+			throw std::invalid_argument("Field " + field + " can't be found");
+	}
 }
