@@ -108,6 +108,31 @@ enum class IAmAEnum
 	Eight
 };
 
+struct ISystem {
+	virtual ~ISystem() {}
+
+	virtual void OnKy() = 0;
+};
+
+class AuthSystem : public ISystem {
+public:
+	void OnKy() {
+		std::cout << "Auth" << std::endl;
+	}
+};
+class PlayerSystem : public ISystem {
+public:
+	void OnKy() {
+		std::cout << "Player" << std::endl;
+	}
+};
+class DebugSystem : public ISystem {
+public:
+	void OnKy() {
+		std::cout << "Debug" << std::endl;
+	}
+};
+
 void printoutAny(Value val)
 {
 	std::cout << "Value: " << (uint64_t) val << std::endl;
@@ -118,6 +143,26 @@ int main()
 	_wchdir(L"E:\\WAPIReflection\\Debug");
 
 	try {
+		auto& types = Assembly::local().getAllTypes();
+		for (auto& t : types)
+		{
+			if (t.kind() == TypeKind::Class)
+			{
+				if (t.asClass().baseClass())
+				{
+					if (*t.asClass().baseClass() == typeof<ISystem>())
+					{
+						std::cout << t.name() << std::endl;
+						void* pClass = t.asClass().constructNoParams();
+
+						//auto pKy = t.asClass().findMethod("OnKy");
+						//if(pKy)
+						//	t.asClass().findMethod("OnKy")->invoke<void>(pClass);
+					}
+				}
+			}
+		}
+
 		for (auto& e : typeof(TI_FINDCHILDREN).asEnum().enumValues())
 		{
 			std::cout << e.first << " = " << e.second << std::endl;
@@ -138,10 +183,10 @@ int main()
 
 		c.findMethod("Plak")->invoke<bool>(&plak, 13, 12);
 
-		ShowType(typeof<Assembly>());
+		ShowType(typeof<PlayerSystem>());
 
 		Assembly ass("AssemblyTest.dll");
-		ShowType(*ass.FindType("ImAPlakStruct"));
+		ShowType(*ass.findType("ImAPlakStruct"));
 	}
 	catch (const std::exception& e)
 	{

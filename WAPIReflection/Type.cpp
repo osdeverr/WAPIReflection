@@ -237,7 +237,7 @@ void WAPIReflection::Type::dump(int tabs) const
 			if (childTag == SymTag::BaseClass)
 			{
 				std::uint32_t tid = child.queryInfo<std::uint32_t, TI_GET_TYPE>();
-				const Type* pType = mpOwnerAssembly->FindType(tid);
+				const Type* pType = mpOwnerAssembly->findType(tid);
 				if (pType)
 				{
 					for (int i = 0; i < tabs; i++) std::cout << '\t';

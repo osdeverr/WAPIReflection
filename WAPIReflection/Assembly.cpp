@@ -80,7 +80,7 @@ WAPIReflection::Assembly::Assembly(const std::string& fileName)
 	LoadTypes();
 }
 
-const WAPIReflection::Type* WAPIReflection::Assembly::FindType(const std::uint32_t id)
+const WAPIReflection::Type* WAPIReflection::Assembly::findType(const std::uint32_t id)
 {
 	auto it = std::find_if(
 		mAssemblyTypes.begin(),
@@ -96,7 +96,7 @@ const WAPIReflection::Type* WAPIReflection::Assembly::FindType(const std::uint32
 	return &*it;
 }
 
-const WAPIReflection::Type* WAPIReflection::Assembly::FindType(const std::string& name)
+const WAPIReflection::Type* WAPIReflection::Assembly::findType(const std::string& name)
 {
 	auto it = std::find_if(
 		mAssemblyTypes.begin(),
@@ -110,6 +110,11 @@ const WAPIReflection::Type* WAPIReflection::Assembly::FindType(const std::string
 		return nullptr;
 
 	return &*it;
+}
+
+const std::vector<WAPIReflection::Type>& WAPIReflection::Assembly::getAllTypes()
+{
+	return mAssemblyTypes;
 }
 
 WAPIReflection::Assembly& WAPIReflection::Assembly::local()

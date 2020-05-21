@@ -12,8 +12,10 @@ namespace WAPIReflection {
 	public:
 		Assembly(const std::string& fileName);
 
-		const Type* FindType(const std::uint32_t id);
-		const Type* FindType(const std::string& name);
+		const Type* findType(const std::uint32_t id);
+		const Type* findType(const std::string& name);
+
+		const std::vector<Type>& getAllTypes();
 
 		static Assembly& local();
 	private:
@@ -57,7 +59,7 @@ namespace WAPIReflection {
 			eraseAllSubStr(name_raw, "struct ");
 			eraseAllSubStr(name_raw, "enum ");
 
-			auto pType = Assembly::local().FindType(name_raw);
+			auto pType = Assembly::local().findType(name_raw);
 			if(!pType)
 				throw std::exception("The specified type does not exist in this assembly.");
 
