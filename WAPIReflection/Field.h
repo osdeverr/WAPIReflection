@@ -20,9 +20,9 @@ namespace WAPIReflection {
 		std::uint32_t offset() const;
 
 		template<class Class>
-		Value<Class> bind(Class& obj) const
+		Value bind(Class& obj) const
 		{
-			return Value<Class>((char*) &obj + offset(), type());
+			return Value((char*) &obj + offset(), type());
 		}
 
 		template<typename Class, typename T>

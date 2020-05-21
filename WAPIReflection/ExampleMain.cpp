@@ -108,16 +108,9 @@ enum class IAmAEnum
 	Eight
 };
 
-template<typename T>
-void printoutAny(Value<T> val)
+void printoutAny(Value val)
 {
-	std::cout << "Value (arbitrary): " << (float) val << std::endl;
-}
-
-template<>
-void printoutAny(Value<PlakableImpl> val)
-{
-	std::cout << "Value (from PlakableImpl): " << (float)val << std::endl;
+	std::cout << "Value: " << (uint64_t) val << std::endl;
 }
 
 int main()
@@ -130,7 +123,7 @@ int main()
 		auto fPlak = c.findField("mPlak")->bind(plak);
 		fPlak = 255;
 
-		c.findField("mFloats")->bind(plak)[4666] = 24.5f;
+		c.findField("mFloats")->bind(plak)[4] = 24.5f;
 
 		WNDCLASSEXA wcl;
 		wcl.cbSize = 666;

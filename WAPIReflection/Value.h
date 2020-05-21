@@ -5,7 +5,6 @@
 #include "Array.h"
 
 namespace WAPIReflection {
-	template<class Class = void>
 	class Value
 	{
 	public:
