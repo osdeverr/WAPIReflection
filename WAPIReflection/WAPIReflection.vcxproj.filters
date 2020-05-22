@@ -112,6 +112,9 @@
     <ClInclude Include="src\InitNotifySystem.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\TaggedClassMgr.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="src\SystemManager.h">
       <Filter>src</Filter>
     </ClInclude>

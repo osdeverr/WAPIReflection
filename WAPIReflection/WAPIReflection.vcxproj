@@ -170,6 +170,7 @@
     <ClInclude Include="src\InitNotifySystem.h" />
     <ClInclude Include="src\MessageSystem.h" />
     <ClInclude Include="src\SystemManager.h" />
+    <ClInclude Include="src\TaggedClassMgr.h" />
     <ClInclude Include="wapirefl\Array.h" />
     <ClInclude Include="wapirefl\Assembly.h" />
     <ClInclude Include="wapirefl\BasicType.h" />
