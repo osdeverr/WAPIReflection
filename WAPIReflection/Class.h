@@ -16,23 +16,6 @@ namespace WAPIReflection {
 		const std::vector<Method>& methods() const;
 		const std::vector<Field>& fields() const;
 
-		template<class T = void>
-		T* constructNoParams() const {
-			void* pObj = malloc(Type(*this).size());
-
-			for (auto& m : mMethods)
-			{
-				if (m.name() == name() && m.signature().parameters().empty() && !m.isPure()) // ctor
-				{
-					m.invoke<void>(pObj);
-
-					return (T*) pObj;
-				}
-			}
-
-			return (T*) pObj;
-		}
-
 		const Method* findMethod(const std::string& name) const;
 		const Field* findField(const std::string& name) const;
 
