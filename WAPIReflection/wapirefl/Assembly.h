@@ -48,7 +48,13 @@ namespace WAPIReflection {
 		}
 
 		template<typename T>
-		const Type& FindLocalType()
+		struct StructWithType
+		{
+			T* pValue;
+		};
+
+		template<typename T>
+		const Type& GetTypeFromLocalAssembly()
 		{
 			using RawType = typename std::remove_pointer<T>::type;
 
@@ -65,17 +71,28 @@ namespace WAPIReflection {
 
 			return *pType;
 		}
+
+		template<typename T>
+		const Type FindLocalType()
+		{
+			// This should never fail.
+			StructWithType<T> s;
+			return GetTypeFromLocalAssembly<StructWithType<T>>().
+				asClass().
+				findField("pValue")->type().
+				asPointer().pointee();
+		}
 	}
 }
 
 template<typename T>
-const WAPIReflection::Type& typeof()
+const WAPIReflection::Type typeof()
 {
 	return WAPIReflection::Detail::FindLocalType<T>();
 }
 
 template<typename T>
-const WAPIReflection::Type& typeof(T&& value)
+const WAPIReflection::Type typeof(T&& value)
 {
 	return WAPIReflection::Detail::FindLocalType<T>();
 }

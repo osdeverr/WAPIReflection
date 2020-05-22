@@ -30,11 +30,11 @@ private:
 
 // Manages a list of instances of classes distinguished by inheritance from the Tag type.
 // Provides methods to add new classes, find them in WAPIRefl assemblies and invoke methods on all instances.
-template<class Tag>
+template<class TClassTag>
 class TaggedClassMgr
 {
 public:
-	// Checks if T inherits from TSystemTag: if it does, constructs an instance of T
+	// Checks if T inherits from TClassTag: if it does, constructs an instance of T
 	// and adds it to the instance list. If it doesn't, does nothing.
 	template<typename T>
 	void Add() {
@@ -43,12 +43,12 @@ public:
 		{
 			auto& cl = type.asClass();
 
-			if (cl.baseClass() && *cl.baseClass() == typeof<Tag>())
+			if (cl.baseClass() && *cl.baseClass() == typeof<TClassTag>())
 				AddInternal(cl);
 		}
 	}
 
-	// Constructs all classes inheriting from Tag in the specified assembly.
+	// Constructs all classes inheriting from TClassTag in the specified assembly.
 	// Adds the resulting instances to the internal list.
 	void AddFromAssembly(WAPIReflection::Assembly& assembly)
 	{
@@ -58,7 +58,7 @@ public:
 			{
 				auto& cl = type.asClass();
 
-				if (cl.baseClass() && *cl.baseClass() == typeof<Tag>())
+				if (cl.baseClass() && *cl.baseClass() == typeof<TClassTag>())
 					AddInternal(cl);
 			}
 		}
@@ -74,7 +74,7 @@ protected:
 			sys.InvokeIfValid(method, args...);
 	}
 
-	// Constructs a class instance without Tag checks.
+	// Constructs a class instance without TClassTag checks.
 	void AddInternal(const WAPIReflection::Class& type)
 	{
 		std::printf(" => %s\n", type.name().c_str());

@@ -47,6 +47,39 @@ const std::vector<WAPIReflection::Field>& WAPIReflection::Class::fields() const
 	return mFields;
 }
 
+WAPIReflection::Object WAPIReflection::Class::construct(const std::vector<Object>& params) const
+{
+	for (auto& m : mMethods)
+	{
+		if (m.name() == name() && !m.isPure()) // ctor
+		{
+			auto sig = m.signature();
+			if (sig.parameters().size() != params.size())
+				continue;
+
+			bool typesMatch = true;
+			size_t i = 0;
+			for (auto& param : sig.parameters())
+			{
+				if (param != params[i].type())
+				{
+					typesMatch = false;
+					break;
+				}
+
+				i++;
+			}
+
+			if (typesMatch)
+			{
+
+			}
+		}
+	}
+
+	throw std::exception("Ctor not found!");
+}
+
 const WAPIReflection::Method* WAPIReflection::Class::findMethod(const std::string& name) const
 {
 	for (auto& m : mMethods)

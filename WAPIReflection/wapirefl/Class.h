@@ -3,6 +3,7 @@
 #include "Method.h"
 #include "Field.h"
 #include "Type.h"
+#include "Object.h"
 
 namespace WAPIReflection {
 	class Class : public Symbol
@@ -32,6 +33,8 @@ namespace WAPIReflection {
 
 			return (T*) pObj;
 		}
+
+		Object construct(const std::vector<Object>& params) const;
 
 		const Method* findMethod(const std::string& name) const;
 		const Field* findField(const std::string& name) const;

@@ -118,5 +118,11 @@
     <ClInclude Include="src\SystemManager.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="wapirefl\Object.h">
+      <Filter>wapirefl</Filter>
+    </ClInclude>
+    <ClInclude Include="wapirefl\ObjectImpl.h">
+      <Filter>wapirefl</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

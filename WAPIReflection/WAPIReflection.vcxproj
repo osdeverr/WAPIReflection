@@ -179,6 +179,8 @@
     <ClInclude Include="wapirefl\Field.h" />
     <ClInclude Include="wapirefl\FuncSignature.h" />
     <ClInclude Include="wapirefl\Method.h" />
+    <ClInclude Include="wapirefl\Object.h" />
+    <ClInclude Include="wapirefl\ObjectImpl.h" />
     <ClInclude Include="wapirefl\Pointer.h" />
     <ClInclude Include="wapirefl\Symbol.h" />
     <ClInclude Include="wapirefl\SymTag.h" />
