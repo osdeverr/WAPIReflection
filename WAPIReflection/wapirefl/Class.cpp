@@ -72,7 +72,7 @@ WAPIReflection::Object WAPIReflection::Class::construct(const std::vector<Object
 
 			if (typesMatch)
 			{
-
+				throw std::exception("How do I construct lol?");
 			}
 		}
 	}
