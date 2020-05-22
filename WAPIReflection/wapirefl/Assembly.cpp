@@ -37,7 +37,13 @@ void WAPIReflection::Assembly::LoadTypes()
 			PVOID UserContext) -> BOOL {
 				ETBNUserData data = *(ETBNUserData*)UserContext;
 
-				//std::cout << pSymInfo->Name << std::endl;
+				if (pSymInfo->Tag == (ULONG) SymTag::Typedef)
+					return TRUE;
+
+				//if (std::string(pSymInfo->Name).find_first_of("__") == 0)
+				//	return TRUE;
+
+				//std::cout << pSymInfo->Name << " " << std::hex << pSymInfo->Tag << std::dec << std::endl;
 				data.pTypes->push_back(Type(data.pAssembly, pSymInfo->ModBase, pSymInfo->TypeIndex));
 
 				return TRUE;

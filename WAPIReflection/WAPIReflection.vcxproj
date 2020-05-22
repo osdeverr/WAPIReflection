@@ -71,12 +71,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -89,12 +91,15 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>DebugFull</GenerateDebugInformation>
       <AdditionalDependencies>dbghelp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AssemblyDebug>true</AssemblyDebug>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -144,34 +149,41 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Array.h" />
-    <ClInclude Include="Assembly.h" />
-    <ClInclude Include="BasicType.h" />
-    <ClInclude Include="Class.h" />
-    <ClInclude Include="Enum.h" />
-    <ClInclude Include="Field.h" />
-    <ClInclude Include="FuncSignature.h" />
-    <ClInclude Include="Method.h" />
-    <ClInclude Include="Pointer.h" />
-    <ClInclude Include="Symbol.h" />
-    <ClInclude Include="SymTag.h" />
-    <ClInclude Include="Type.h" />
-    <ClInclude Include="Value.h" />
-    <ClInclude Include="ValueType.h" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\InitNotifySystem.cpp" />
+    <ClCompile Include="src\MessageSystem.cpp" />
+    <ClCompile Include="src\SystemManager.cpp" />
+    <ClCompile Include="wapirefl\Array.cpp" />
+    <ClCompile Include="wapirefl\Assembly.cpp" />
+    <ClCompile Include="wapirefl\Class.cpp" />
+    <ClCompile Include="wapirefl\Enum.cpp" />
+    <ClCompile Include="wapirefl\Field.cpp" />
+    <ClCompile Include="wapirefl\FuncSignature.cpp" />
+    <ClCompile Include="wapirefl\Method.cpp" />
+    <ClCompile Include="wapirefl\Pointer.cpp" />
+    <ClCompile Include="wapirefl\Symbol.cpp" />
+    <ClCompile Include="wapirefl\Type.cpp" />
+    <ClCompile Include="wapirefl\ValueType.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Array.cpp" />
-    <ClCompile Include="Assembly.cpp" />
-    <ClCompile Include="Class.cpp" />
-    <ClCompile Include="Enum.cpp" />
-    <ClCompile Include="ExampleMain.cpp" />
-    <ClCompile Include="Field.cpp" />
-    <ClCompile Include="FuncSignature.cpp" />
-    <ClCompile Include="Method.cpp" />
-    <ClCompile Include="Pointer.cpp" />
-    <ClCompile Include="Symbol.cpp" />
-    <ClCompile Include="Type.cpp" />
-    <ClCompile Include="ValueType.cpp" />
+    <ClInclude Include="src\ISystem.h" />
+    <ClInclude Include="src\InitNotifySystem.h" />
+    <ClInclude Include="src\MessageSystem.h" />
+    <ClInclude Include="src\SystemManager.h" />
+    <ClInclude Include="wapirefl\Array.h" />
+    <ClInclude Include="wapirefl\Assembly.h" />
+    <ClInclude Include="wapirefl\BasicType.h" />
+    <ClInclude Include="wapirefl\Class.h" />
+    <ClInclude Include="wapirefl\Enum.h" />
+    <ClInclude Include="wapirefl\Field.h" />
+    <ClInclude Include="wapirefl\FuncSignature.h" />
+    <ClInclude Include="wapirefl\Method.h" />
+    <ClInclude Include="wapirefl\Pointer.h" />
+    <ClInclude Include="wapirefl\Symbol.h" />
+    <ClInclude Include="wapirefl\SymTag.h" />
+    <ClInclude Include="wapirefl\Type.h" />
+    <ClInclude Include="wapirefl\Value.h" />
+    <ClInclude Include="wapirefl\ValueType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

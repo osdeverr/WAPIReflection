@@ -28,8 +28,8 @@ WAPIReflection::Class::Class(const Symbol& type) : Symbol(type)
 
 WAPIReflection::Class::~Class()
 {
-	if (mpBaseClass)
-		delete mpBaseClass;
+	//if (mpBaseClass)
+	//	delete mpBaseClass;
 }
 
 const WAPIReflection::Class* WAPIReflection::Class::baseClass() const
