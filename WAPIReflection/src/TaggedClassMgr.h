@@ -2,31 +2,7 @@
 #include <wapirefl/Assembly.h>
 #include <wapirefl/Class.h>
 
-// Represents a reference to a class instance.
-// Provides methods to invoke arbitrary methods of said class.
-class InstanceRef
-{
-public:
-	// Constructs an InstanceRef from the specified class.
-	InstanceRef(const WAPIReflection::Class& class_)
-		: mClass(class_), mInstance(class_.constructNoParams())
-	{}
-
-	// Invokes a method of the class this instance is bound to.
-	// Does nothing if the specified method does not exist.
-	// NOTE: you are responsible for checking arguments' validity!
-	template<typename... Args>
-	void InvokeIfValid(const std::string& method, Args... args)
-	{
-		auto pMethod = mClass.findMethod(method);
-		if (pMethod)
-			pMethod->invoke<void, Args...>(mInstance, args...);
-	}
-
-private:
-	WAPIReflection::Class mClass;
-	void* mInstance;
-};
+#include "InstanceRef.h"
 
 // Manages a list of instances of classes distinguished by inheritance from the Tag type.
 // Provides methods to add new classes, find them in WAPIRefl assemblies and invoke methods on all instances.
@@ -52,16 +28,61 @@ public:
 	// Adds the resulting instances to the internal list.
 	void AddFromAssembly(WAPIReflection::Assembly& assembly)
 	{
-		for (auto& type : assembly.getAllTypes())
+		std::printf("Loading assembly types...\n");
+		auto tagType = typeof<TClassTag>();
+
+		/*
+
+		assembly.forEachType([&](const WAPIReflection::Symbol& sym) {
+			if (sym.tag() == WAPIReflection::SymTag::UDT)
+			{
+				auto children = sym.children();
+				for(auto& c : children)
+					if(c.tag() == WAPIReflection::SymTag::BaseClass)
+						if (c == tagType)
+							AddInternal(WAPIReflection::Class(sym));
+			}
+			});*/
+
+		char chars[] { '-', '\\', '|', '/' };
+		
+		auto& types = assembly.getAllTypes();
+		size_t i = 0;
+
+		std::string oldName = "";
+
+		for (auto& type : types)
 		{
 			if (type.kind() == WAPIReflection::TypeKind::Class)
 			{
 				auto& cl = type.asClass();
 
-				if (cl.baseClass() && *cl.baseClass() == typeof<TClassTag>())
+				/*
+				std::putchar('\r');
+				for (size_t j = 0; j < oldName.length() + 3; j++)
+					std::putchar(' ');
+				std::putchar('\r');
+
+				std::string name = cl.name();
+				if (name.length() >= 60)
+				{
+					name.resize(60);
+					name.append("...");
+				}
+				std::printf(" %c %s", chars[i % sizeof(chars)], name.c_str());
+				i++;
+				oldName = name;
+				*/
+
+				if (cl.baseClass() && *cl.baseClass() == tagType)
 					AddInternal(cl);
 			}
 		}
+
+		std::putchar('\r');
+		for (size_t j = 0; j < oldName.length() + 3; j++)
+			std::putchar(' ');
+		std::putchar('\r');
 	}
 
 protected:

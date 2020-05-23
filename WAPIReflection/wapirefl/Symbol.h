@@ -33,7 +33,7 @@ namespace WAPIReflection {
 			if (hasInfo<TI_GET_SYMNAME>())
 				eqByName = this->name() == rhs.name();
 
-			return eqByIds | eqByName;
+			return eqByIds || eqByName;
 		}
 		bool operator!=(const Symbol& rhs) const {
 			return !(*this == rhs);

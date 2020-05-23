@@ -166,6 +166,9 @@
     <ClCompile Include="wapirefl\ValueType.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Attributes.h" />
+    <ClInclude Include="src\InstanceRef.h" />
+    <ClInclude Include="src\IServiceProvider.h" />
     <ClInclude Include="src\ISystem.h" />
     <ClInclude Include="src\InitNotifySystem.h" />
     <ClInclude Include="src\MessageSystem.h" />

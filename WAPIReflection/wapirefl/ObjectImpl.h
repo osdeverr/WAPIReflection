@@ -11,6 +11,24 @@ namespace WAPIReflection {
 		virtual void* data() = 0;
 	};
 
+	class KnownObjectImpl : public IObjectImpl
+	{
+	public:
+		KnownObjectImpl(const Type& t, void* pData) : mType(t), mpObject(pData) {}
+
+		Type type() {
+			return mType;
+		}
+
+		void* data() {
+			return mpObject;
+		}
+
+	private:
+		Type mType;
+		void* mpObject;
+	};
+
 	template<typename T>
 	class ObjectImpl : public IObjectImpl
 	{

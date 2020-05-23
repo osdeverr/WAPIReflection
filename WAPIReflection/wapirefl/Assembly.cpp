@@ -123,6 +123,40 @@ const std::vector<WAPIReflection::Type>& WAPIReflection::Assembly::getAllTypes()
 	return mAssemblyTypes;
 }
 
+void WAPIReflection::Assembly::forEachType(std::function<void(const Symbol&)> callback)
+{
+	struct ETBNUserData {
+		Assembly* pAssembly;
+		std::function<void(const Symbol&)> callback;
+	} userData = { this, callback };
+
+	BOOL result = SymEnumTypesByName(
+		GetCurrentProcess(),
+		mModuleBase,
+		"*!*",
+		[](PSYMBOL_INFO pSymInfo,
+			ULONG SymbolSize,
+			PVOID UserContext) -> BOOL {
+				const ETBNUserData& data = *(ETBNUserData*)UserContext;
+
+				if (pSymInfo->Tag == (ULONG)SymTag::Typedef)
+					return TRUE;
+
+				data.callback(Symbol(data.pAssembly, pSymInfo->ModBase, pSymInfo->TypeIndex));
+
+				return TRUE;
+		}, &userData);
+
+	if (!result)
+		throw std::system_error(
+			std::error_code(
+				GetLastError(),
+				std::system_category()
+			),
+			"SymEnumTypesByName failed"
+		);
+}
+
 WAPIReflection::Assembly& WAPIReflection::Assembly::local()
 {
 	static Assembly sLocalAssembly = Assembly();

@@ -124,5 +124,14 @@
     <ClInclude Include="wapirefl\ObjectImpl.h">
       <Filter>wapirefl</Filter>
     </ClInclude>
+    <ClInclude Include="src\InstanceRef.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\IServiceProvider.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Attributes.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

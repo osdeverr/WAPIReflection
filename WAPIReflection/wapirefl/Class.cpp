@@ -5,14 +5,12 @@ WAPIReflection::Class::Class(const Symbol& type) : Symbol(type)
 {
 	mpBaseClass = nullptr;
 
-	for (auto& child : children())
+	auto clist = children();
+	for (auto& child : clist)
 	{
 		if (child.tag() == SymTag::BaseClass)
 			mpBaseClass = new Class(Type(mpOwnerAssembly, mModBase, child.queryInfo<std::uint32_t, TI_GET_TYPE>()));
-	}
 
-	for (auto& child : children())
-	{
 		if (child.tag() == SymTag::Function)
 		{
 			// Ignore compiler-generated __ prefix stuff
@@ -35,6 +33,11 @@ WAPIReflection::Class::~Class()
 const WAPIReflection::Class* WAPIReflection::Class::baseClass() const
 {
 	return mpBaseClass;
+}
+
+const bool WAPIReflection::Class::isBase(const Class& cl) const
+{
+	return mpBaseClass && *mpBaseClass == cl;
 }
 
 const std::vector<WAPIReflection::Method>& WAPIReflection::Class::methods() const

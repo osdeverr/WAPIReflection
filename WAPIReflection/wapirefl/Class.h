@@ -14,6 +14,8 @@ namespace WAPIReflection {
 
 		const Class* baseClass() const;
 
+		const bool isBase(const Class& cl) const;
+
 		const std::vector<Method>& methods() const;
 		const std::vector<Field>& fields() const;
 

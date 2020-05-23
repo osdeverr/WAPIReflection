@@ -3,6 +3,7 @@
 #include <DbgHelp.h>
 #include <string>
 #include <vector>
+#include <functional>
 
 #include "Type.h"
 
@@ -16,6 +17,8 @@ namespace WAPIReflection {
 		const Type* findType(const std::string& name);
 
 		const std::vector<Type>& getAllTypes();
+		
+		void forEachType(std::function<void(const Symbol&)> callback);
 
 		static Assembly& local();
 	private:
@@ -76,7 +79,7 @@ namespace WAPIReflection {
 		const Type FindLocalType()
 		{
 			// This should never fail.
-			StructWithType<T> s;
+			[[maybe_unused]] StructWithType<T> s;
 			return GetTypeFromLocalAssembly<StructWithType<T>>().
 				asClass().
 				findField("pValue")->type().
@@ -92,7 +95,7 @@ const WAPIReflection::Type typeof()
 }
 
 template<typename T>
-const WAPIReflection::Type typeof(T&& value)
+const WAPIReflection::Type typeof(const T& value)
 {
 	return WAPIReflection::Detail::FindLocalType<T>();
 }
