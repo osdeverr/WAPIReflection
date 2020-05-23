@@ -10,6 +10,12 @@ public:
 	InstanceRef(const WAPIReflection::Class& class_)
 		: mClass(class_), mInstance(class_.constructNoParams())
 	{}
+	
+	// Returns the class of this instance.
+	const WAPIReflection::Class& GetClass() const
+	{
+		return mClass;
+	}
 
 	// Invokes a method of the class this instance is bound to.
 	// Does nothing if the specified method does not exist.

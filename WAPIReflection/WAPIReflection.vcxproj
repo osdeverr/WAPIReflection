@@ -152,7 +152,9 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\InitNotifySystem.cpp" />
     <ClCompile Include="src\MessageSystem.cpp" />
+    <ClCompile Include="src\SysMgrTests.cpp" />
     <ClCompile Include="src\SystemManager.cpp" />
+    <ClCompile Include="src\TestManager.cpp" />
     <ClCompile Include="wapirefl\Array.cpp" />
     <ClCompile Include="wapirefl\Assembly.cpp" />
     <ClCompile Include="wapirefl\Class.cpp" />
@@ -167,6 +169,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Attributes.h" />
+    <ClInclude Include="src\SysMgrTests.h" />
+    <ClInclude Include="src\Test.h" />
     <ClInclude Include="src\InstanceRef.h" />
     <ClInclude Include="src\IServiceProvider.h" />
     <ClInclude Include="src\ISystem.h" />
@@ -174,6 +178,7 @@
     <ClInclude Include="src\MessageSystem.h" />
     <ClInclude Include="src\SystemManager.h" />
     <ClInclude Include="src\TaggedClassMgr.h" />
+    <ClInclude Include="src\TestManager.h" />
     <ClInclude Include="wapirefl\Array.h" />
     <ClInclude Include="wapirefl\Assembly.h" />
     <ClInclude Include="wapirefl\BasicType.h" />

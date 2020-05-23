@@ -12,6 +12,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{22792b66-c2dd-4ba4-8bda-cdd64a7008a4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\tests">
+      <UniqueIdentifier>{376c106a-96d0-43fb-8d54-2c64f21775d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\testsys">
+      <UniqueIdentifier>{6fc28bda-ced4-4ad2-b78b-0aa25330b55a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="wapirefl\Array.cpp">
@@ -59,6 +65,10 @@
     <ClCompile Include="src\SystemManager.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\TestManager.cpp">
+      <Filter>src\testsys</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SysMgrTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="wapirefl\Array.h">
@@ -132,6 +142,15 @@
     </ClInclude>
     <ClInclude Include="src\Attributes.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TestManager.h">
+      <Filter>src\testsys</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Test.h">
+      <Filter>src\testsys</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SysMgrTests.h">
+      <Filter>src\tests</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

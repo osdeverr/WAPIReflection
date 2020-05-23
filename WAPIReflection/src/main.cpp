@@ -4,6 +4,7 @@
 
 #include "SystemManager.h"
 #include "Attributes.h"
+#include "TestManager.h"
 
 class Plak : public ISystem
 {
@@ -70,6 +71,11 @@ public:
 
 int main()
 {
+	TestManager testMgr;
+	testMgr.AddFromAssembly(WAPIReflection::Assembly::local());
+	testMgr.RunTests();
+
+	/*
 	try {
 		using namespace std::literals;
 		using namespace WAPIReflection;
@@ -84,17 +90,17 @@ int main()
 				std::cout << attr.type().name() << std::endl;
 		}
 
-		SystemManager mgr;
-		mgr.AddFromAssembly(Assembly::local());
-		mgr.OnInitFinished();
+		SystemManager sysMgr;
+		sysMgr.AddFromAssembly(Assembly::local());
+		sysMgr.OnInitFinished();
 
 		std::string msg;
 		while (std::getline(std::cin, msg))
-			mgr.OnTextMessage(msg);
+			sysMgr.OnTextMessage(msg);
 	}
 	catch (const std::exception& e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
 		throw;
-	}
+	}*/
 }

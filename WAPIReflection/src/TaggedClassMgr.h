@@ -28,8 +28,8 @@ public:
 	// Adds the resulting instances to the internal list.
 	void AddFromAssembly(WAPIReflection::Assembly& assembly)
 	{
-		std::printf("Loading assembly types...\n");
 		auto tagType = typeof<TClassTag>();
+		std::printf(" [TCM:%s] Loading assembly types...\n", tagType.name().c_str());
 
 		/*
 
@@ -55,34 +55,17 @@ public:
 		{
 			if (type.kind() == WAPIReflection::TypeKind::Class)
 			{
-				auto& cl = type.asClass();
-
-				/*
-				std::putchar('\r');
-				for (size_t j = 0; j < oldName.length() + 3; j++)
-					std::putchar(' ');
-				std::putchar('\r');
-
-				std::string name = cl.name();
-				if (name.length() >= 60)
-				{
-					name.resize(60);
-					name.append("...");
-				}
-				std::printf(" %c %s", chars[i % sizeof(chars)], name.c_str());
-				i++;
-				oldName = name;
-				*/
+				auto cl = type.asClass();
 
 				if (cl.baseClass() && *cl.baseClass() == tagType)
 					AddInternal(cl);
 			}
 		}
 
-		std::putchar('\r');
+		/*std::putchar('\r');
 		for (size_t j = 0; j < oldName.length() + 3; j++)
 			std::putchar(' ');
-		std::putchar('\r');
+		std::putchar('\r');*/
 	}
 
 protected:
@@ -98,7 +81,8 @@ protected:
 	// Constructs a class instance without TClassTag checks.
 	void AddInternal(const WAPIReflection::Class& type)
 	{
-		std::printf(" => %s\n", type.name().c_str());
+		auto tagType = typeof<TClassTag>();
+		std::printf(" [TCM:%s] Loading type %s\n", tagType.name().c_str(), type.name().c_str());
 		mInstances.push_back(InstanceRef(type));
 	}
 
