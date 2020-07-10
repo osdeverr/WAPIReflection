@@ -1,0 +1,2 @@
+# WAPIReflection
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4d07263552f242f195df9d645521a335)](https://app.codacy.com/manual/osdeverr/WAPIReflection?utm_source=github.com&utm_medium=referral&utm_content=osdeverr/WAPIReflection&utm_campaign=Badge_Grade_Dashboard)
